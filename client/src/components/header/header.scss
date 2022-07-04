@@ -1,0 +1,30 @@
+@import "../../styles/index.scss";
+
+header {
+  @include flex(row, center, center);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $blue;
+  padding: 10px;
+  z-index: 10;
+  height: 50px;
+  .search {
+    width: 400px !important;
+  }
+
+  @media screen and (max-width: $screen-mobile) {
+    .search {
+      width: 230px !important;
+      margin-left: -50px !important;
+    }
+  }
+
+  #rightNavigation {
+    position: absolute;
+    right: 5px;
+    a{
+      margin-right: 5px;
+    }
+  }
+}

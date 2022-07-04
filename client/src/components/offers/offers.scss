@@ -1,0 +1,14 @@
+@import '../../styles/index.scss';
+
+#offers {
+  position: relative;
+  margin-top: 70px;
+  padding: 0 7%;
+  height: 30%;
+  img {
+    width: 100%;
+  }
+  @media screen and (max-width: $screen-mobile) {
+    padding: 0 5%;
+  }
+}
