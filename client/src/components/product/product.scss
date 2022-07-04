@@ -1,6 +1,14 @@
+@import "../../styles/index.scss";
+
 .product-image {
     height: 270px;
   }
   .card-text {
     height: 70px;
+  }
+
+  @media screen and (max-width: $screen-mobile) {
+    .product-image {
+      height: 400px;
+    }
   }

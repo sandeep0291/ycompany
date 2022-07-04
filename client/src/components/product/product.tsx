@@ -1,3 +1,5 @@
+import './product.scss';
+
 const Product = function ({ item }: any) {
   return (
     <div className="col">

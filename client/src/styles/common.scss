@@ -1,0 +1,48 @@
+@import "./colors.scss";
+@import "./vars.scss";
+
+.page-container {
+  height: 100%;
+  width: 100%;
+
+  main {
+    padding: 1%;
+    font-size: $font-size-small;
+
+    .row {
+      min-height: 300px;
+    }
+  }
+}
+
+.carousel .item {
+  height: 300px;
+}
+.card {
+  margin-bottom: 20px;
+  border: none !important;
+}
+.row-cols-1 {
+  width: 94%;
+  margin-left: 2.5%;
+}
+
+// boootstrap icons colors
+.bi {
+  &.blue {
+    color: $blue;
+  }
+  &.yellow {
+    color: $yellow;
+  }
+  &.white {
+    color: $white;
+  }
+}
+
+// common loader 
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
