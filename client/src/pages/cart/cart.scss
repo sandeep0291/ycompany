@@ -11,6 +11,16 @@
             width: 50px;
         }
 
+        .total-and-checkout{
+            width: 100%;
+            font-size: $font-size-large;
+            font-weight: bold;
+            @include flex(row, flex-end, center);
+            p{
+                margin-right: 20px;
+            }
+        }
+
         .cart-empty{
             overflow:  none;
             height: 400px;
