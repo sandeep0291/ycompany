@@ -1,28 +1,26 @@
 @import "../../styles/index.scss";
 
 #cartPage{
+
     main{
         @include flex(column, center, center);
-        margin-top: 100px !important;
-    
-        .cart-row{
-            width: 100%;
-            @include flex(row, space-between, center);
-            font-size: $font-size-medium;
-            border-bottom: 2px $whitesmoke solid;
-            padding: 5px;
-    
-            .product-thumbnail{
-                width: 50px;
-            }
-            &.cart-total{
-                font-size: $font-size-medium;
-                @include flex(row, flex-end, center);
-                span{
-                    margin-left: 20px;
-                }
-            }
+        position: relative;
+        top:100px !important;
+        
+        img{
+            width: 50px;
         }
+
+        .cart-empty{
+            overflow:  none;
+            height: 400px;
+            width: 100%;
+            position: relative;
+            @include flex(column, center, center);
+            font-size: $font-size-xlarge;
+            color: $yellow;
+        }
+        
     }
 }
 

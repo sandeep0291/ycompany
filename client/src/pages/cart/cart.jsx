@@ -1,64 +1,37 @@
 import "./cart.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../../state-management/slices/productSlice";
+import { useSelector } from "react-redux";
 import Header from "../../components/header/header";
-import { useEffect } from "react";
+import CartItem from "../../components/cartRow/cartRow";
 
 function Cart() {
-  const dispatch = useDispatch();
-  const productList = useSelector((state) => state.product);
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+  const cartState = useSelector((state) => state.cart);
 
   return (
-    <div id="cartPage"className="page-container">
+    <div id="cartPage" className="page-container">
       <Header />
       <main className="container col-md-7">
-        <div className="cart-row font-color-blue">
-          <p>Image</p>
-          <p>Item Name</p>
-          <p>Qty</p>
-          <p>Price</p>
-          <p>Action</p>
-        </div>
-        <div className="cart-row">
-          <picture className="product-thumbnail">
-            <img
-              className="img-thumbnail"
-              src="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/3/10/b6a2b0e5-9c4b-4283-9b34-21a306468ef51552177042449-1.jpg"
-              alt=""
-            />
-          </picture>
-
-          <p>Roadester Size M</p>
-          <p>1</p>
-          <p>Rs 2000</p>
-          <button className="btn btn-sm ">
-            <i class="bi bi-trash3-fill blue"></i>
-          </button>
-        </div>
-        <div className="cart-row">
-          <picture className="product-thumbnail">
-            <img
-              className="img-thumbnail"
-              src="https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/3/10/b6a2b0e5-9c4b-4283-9b34-21a306468ef51552177042449-1.jpg"
-              alt=""
-            />
-          </picture>
-
-          <p>Roadester Size M</p>
-          <p>1</p>
-          <p>Rs 2000</p>
-          <button className="btn btn-sm ">
-            <i class="bi bi-trash3-fill blue"></i>
-          </button>
-        </div>
-
-        <div className="cart-row font-color-blue cart-total">
-          <p><b>Total:</b> <span>Rs 14000</span></p>
-        </div>
+        {cartState.cartItems.length === 0 ? (
+          <div className="cart-empty">Your cart is empty</div>
+        ) : (
+          <table className="table table-striped table-hover table-borderless align-middle table-responsive">
+            <thead>
+              <tr>
+                <th scope="col" className="d-none d-sm-block d-xs-block">
+                  Image
+                </th>
+                <th scope="col">Name</th>
+                <th scope="col">Qty * Price</th>
+                <th scope="col">SubTotal</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartState.cartItems.map(function (item) {
+                return <CartItem item={item} />;
+              })}
+            </tbody>
+          </table>
+        )}
       </main>
     </div>
   );

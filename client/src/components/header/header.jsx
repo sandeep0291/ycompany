@@ -45,7 +45,7 @@ const Header = function () {
         </Link>
       </div>
 
-      <div id="rightNavigation" className="d-md-none">
+      <div id="rightNavigation" className="d-md-none d-sm-none">
         <Link to="/home">
           <i className="bi bi-house-door yellow"></i>
         </Link>
