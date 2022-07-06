@@ -9,8 +9,8 @@ module.exports = /* GraphQL */ `
   }
 
   type Query {
-    Products: [Product]
-    ProductSearchByName(name: String, description: String): [Product]
+    Products(limit: Int, offset: Int): [Product]
+    ProductSearchByName(name: String, offset: Int, limit: Int): [Product]
   }
 
   type Mutation {

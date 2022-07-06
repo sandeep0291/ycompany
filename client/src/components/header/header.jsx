@@ -1,36 +1,41 @@
 import "./header.scss";
-import { fetchProductsByName } from "../../state-management/slices/productSlice";
+import { fetchProductsByName, clearProductList } from "../../state-management/slices/productSlice";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { debounce } from "../../utils/utils";
-import { useEffect, useState } from "react";
 
 const Header = function () {
   const dispatch = useDispatch();
   const location = useLocation().pathname;
 
   const handleSearchChange = debounce((e) => {
+    dispatch(clearProductList());
     dispatch(fetchProductsByName(e.target.value));
-  }, 500);
+    e.target.value = "";
+  }, 1000);
+
+  const renderSearch = ()=>{
+    return (
+      <div className="search-input">
+        <div className="input-group input-group-md input">
+          <input
+            type="text"
+            placeholder="Search products here.."
+            className="form-control search"
+            onChange={handleSearchChange}
+          />
+          <span className="input-group-text" id="basic-addon1">
+            <i className="bi bi-search blue"></i>
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <header>
-      {location !== "/home" ? null : (
-        <div className="search-input">
-          <div className="input-group input-group-md input">
-            <input
-              type="text"
-              placeholder="Search products here.."
-              className="form-control search"
-              onChange={handleSearchChange}
-            />
-            <span className="input-group-text" id="basic-addon1">
-              <i className="bi bi-search blue"></i>
-            </span>
-          </div>
-        </div>
-      )}
-
+      {location !== "/home" ? null : renderSearch() }
+      {/* display on mobile devices */}
       <div id="rightNavigation" className="d-none d-sm-block">
         <Link to="/home">
           <button type="button" className="btn btn-outline-warning btn-md">
@@ -44,7 +49,7 @@ const Header = function () {
           </button>
         </Link>
       </div>
-
+      {/* display on mobile devices */}
       <div id="rightNavigation" className="d-md-none d-sm-none">
         <Link to="/home">
           <i className="bi bi-house-door yellow"></i>

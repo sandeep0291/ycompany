@@ -2,15 +2,17 @@ const Product = require("../../models/products");
 
 module.exports = {
   Query: {
-    Products: () => {
+    Products: (parent, args) => {
       // return all products from DB
-      return Product.find({});
+      return Product.find({}).skip(args.offset).limit(args.limit);
     },
     ProductSearchByName: (parent, args) => {
-      
-      return Product.find({ name: { $regex: ".*" + args.name + ".*" } } ||
-      { description: { $regex: ".*" + description.name + ".*" } }) ;
-      //return product.findOne({name:args.name})
+      return Product.find( {
+        $or:[
+          { name: { $regex: ".*" + args.name + ".*" } },
+          { description: { $regex: ".*" + args.name + ".*" } }
+        ]
+      }).skip(args.offset).limit(args.limit) ;
     },
   },
   

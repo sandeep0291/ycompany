@@ -8,8 +8,8 @@ export const GET_ALL_PRODUCT_CATEGORY = `
 `;
 
 export const GET_ALL_PRODUCT = `
-  query {
-    Products {
+  query Products($limit: Int!, $offset: Int!){
+    Products(limit: $limit, offset: $offset) {
       _id
       name
       description
@@ -20,8 +20,8 @@ export const GET_ALL_PRODUCT = `
 `;
 
 export const GET_PRODUCTS_BY_NAME = `
-  query ProductSearchByName($name: String!) {
-    ProductSearchByName(name: $name) {
+  query ProductSearchByName($name: String!, $offset: Int!, $limit: Int!) {
+    ProductSearchByName(name: $name, offset: $offset, limit: $limit) {
       _id
       name
       description
