@@ -80,6 +80,7 @@ const productSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.isSearch = false;
+      state.searchMoreResults = false;
       const productList = [...state.productList, ...action.payload];
       state.productList = productList;
       if (action.payload.length === state.limit) {
@@ -97,6 +98,7 @@ const productSlice = createSlice({
     });
     builder.addCase(fetchProductsByName.fulfilled, (state, action) => {
       state.loading = false;
+      state.isShowMoreItemLeft = false;
       if(!state.isSearch){
         state.isSearch = true;
         state.productList = action.payload.items;

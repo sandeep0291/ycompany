@@ -53,7 +53,7 @@ function Home() {
     );
   };
 
-  const renderSearchedRecords = () => {
+  const renderSearchedInfo = () => {
     return (
       <div className="col-md-12 text-center">
         <p className="text-danger h5">
@@ -77,17 +77,16 @@ function Home() {
       <Header />
       <Offers />
       <main className="container">
-        {productState.isSearch ? renderSearchedRecords() : null}
+        {productState.isSearch ? renderSearchedInfo() : null}
 
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
-          {productState.loading ? <Loader /> : renderProdcutList()}
+          {renderProdcutList()}
+          {productState.loading && <Loader />}
         </div>
 
-        {productState.isShowMoreItemLeft &&
-        productState.productList.length &&
-        !productState.isSearch
-          ? renderShowMore()
-          : null}
+        {productState.isShowMoreItemLeft && renderShowMore()}
+
+        {productState.searchMoreResults && renderSearchShowMore()}
       </main>
     </div>
   );
