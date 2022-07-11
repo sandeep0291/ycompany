@@ -14,6 +14,7 @@ const Header = function () {
     e.target.value = "";
   }, 1000);
 
+
   const renderSearch = ()=>{
     return (
       <div className="search-input">
@@ -34,7 +35,7 @@ const Header = function () {
 
   return (
     <header>
-      {location !== "/home" ? null : renderSearch() }
+      {location !== "/home" && location !== "/" ? null : renderSearch() }
       {/* display on mobile devices */}
       <div id="rightNavigation" className="d-none d-sm-block">
         <Link to="/home">
