@@ -12,12 +12,25 @@ header {
   .search {
     width: 28vw !important;
   }
+  #logo{
+    height: 45px;
+    position: absolute;
+    left: 10px;
+    border-radius: 25px;
+  }
 
   @media screen and (max-width: $screen-mobile) {
     .search {
-      width: 230px !important;
-      margin-left: -50px !important;
+      width: 200px !important;
+      margin-left: 0px !important;
     }
+    #logo{
+      height: 35px;
+      position: absolute;
+      left: 10px;
+      border-radius: 25px;
+    }
+  
   }
 
   #rightNavigation {

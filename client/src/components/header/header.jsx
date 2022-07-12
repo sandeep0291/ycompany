@@ -3,10 +3,24 @@ import { fetchProductsByName, clearProductList } from "../../state-management/sl
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { debounce } from "../../utils/utils";
+import Logo from '../../assets/logo.png';
+import { useEffect, useState } from "react";
 
 const Header = function () {
   const dispatch = useDispatch();
   const location = useLocation().pathname;
+  const [navActive, setNavActive] = useState({
+    home: false,
+    cart: false
+  }) 
+
+  useEffect(()=>{
+    if(location === "/home" || location === "/"){
+      setNavActive({home: true, cart: false})
+    }else{
+      setNavActive({home: false, cart: true})
+    }
+  },[location])
 
   const handleSearchChange = debounce((e) => {
     dispatch(clearProductList());
@@ -37,15 +51,16 @@ const Header = function () {
     <header>
       {location !== "/home" && location !== "/" ? null : renderSearch() }
       {/* display on mobile devices */}
+      <img id="logo" src={Logo} alt="logo" />
       <div id="rightNavigation" className="d-none d-sm-block">
         <Link to="/home">
-          <button type="button" className="btn btn-outline-warning btn-md">
+          <button type="button" className={`btn btn-outline-warning btn-md ${navActive.home ? 'active' : ''}`}>
             <i className="bi bi-house-door"></i>&nbsp; Home
           </button>
         </Link>
         &nbsp;&nbsp;
         <Link to="/cart">
-          <button type="button" className="btn btn-outline-warning btn-md">
+          <button type="button" className={`btn btn-outline-warning btn-md ${navActive.cart ? 'active' : ''}`}>
             <i className="bi bi-cart"></i>&nbsp; Cart
           </button>
         </Link>
