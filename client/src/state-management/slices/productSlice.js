@@ -7,7 +7,7 @@ const initialState = {
   error: "",
   searchText: "",
   productList: [],
-  isShowMoreItemLeft: true,
+  isShowMoreItemLeft: false,
   isSearch: false,
   searchMoreResults: false,
   searchMoreOffset: 0,

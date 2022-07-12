@@ -1,10 +1,55 @@
 import "./cart.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/header/header";
 import CartItem from "../../components/cartRow/cartRow";
+import {
+  clearCart
+} from "../../state-management/slices/cartSlice";
+
 
 function Cart() {
   const cartState = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const loadRazorPayScript = (src)=>{
+    return new Promise((resolve)=>{
+      const script = document.createElement('script');
+      script.src = src;
+
+      script.onload = ()=>{
+        resolve(true);
+      }
+      script.onerror = ()=>{
+        resolve(false);
+      }
+      document.body.appendChild(script);
+    })
+  }
+
+  const displayRazorPay = async() =>{
+    const api = await loadRazorPayScript('https://checkout.razorpay.com/v1/checkout.js');
+    if(!api){
+      alert("Please check network");
+      return;
+    }
+    const options = {
+      key: 'rzp_test_esbLMNrHV6xwER',
+      currency: 'INR',
+      amount: cartState.totalAmount*100,
+      name: 'YCompany Checkout',
+      description: 'This is testing env',
+      handler: function(){
+        dispatch(clearCart());
+        alert("Payment is successfully done.");
+      },
+      prefill: {
+        name: "YCompany"
+      }
+    }
+
+    const checkout = new window.Razorpay(options);
+    checkout.open();
+  }
 
   return (
     <div id="cartPage" className="page-container">
@@ -34,7 +79,7 @@ function Cart() {
             </table>
             <div className="total-and-checkout">
                 <p><b>TOTAL: {cartState.totalAmount} /-</b></p>
-                <button className="btn btn-warning">Checkout</button>
+                <button className="btn btn-warning" onClick={displayRazorPay}>Checkout</button>
             </div>
           </>
         )}
