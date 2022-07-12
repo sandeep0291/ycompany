@@ -25,6 +25,7 @@ const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -32,6 +33,8 @@ app.use(
     graphiql: true,
   })
 );
+
+//app.use('/.netlify/functions',router);
 //app.use(express.static(__dirname + "/../client/drgupta/dist"));
 
 // app.get("/*", function (req, res) {
@@ -39,6 +42,6 @@ app.use(
 //   //  res.sendFile(__dirname + "/../client/drgupta/dist/index.html");
 // });
 
-var server = app.listen(process.env.PORT || 4000, function () {
+var server = app.listen(4000, function () {
   console.log("Listening on port " + server.address().port);
 });
